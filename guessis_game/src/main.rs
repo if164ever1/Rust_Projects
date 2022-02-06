@@ -8,20 +8,21 @@ use std::cmp::Ordering;
 
 fn main() {
     
-
-    
-    
-    
-
     loop {
         let mut rng =  rand::thread_rng();
-    let  secret_number = rng.gen_range(1..25);
+        let  secret_number = rng.gen_range(1..25);
 
-    let mut guess = String::new();
+        let mut guess = String::new();
+        
         println!("Guess the number");
         println!("Please enter a number");
+        
         io::stdin().read_line(&mut guess).expect("Can not read your number");
-        let guess: u32 = guess.trim().parse().expect("Please enter a number");
+
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,  
+        };
 
         println!("Secret number is {} ", secret_number);
 
@@ -30,7 +31,10 @@ fn main() {
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("The number is less"),
             Ordering::Greater => println!("The number is bigger"),
-            Ordering::Equal => println!("You are right"),   
+            Ordering::Equal => {
+                println!("You are right and WIN!!!");
+                break;
+            }   
         }
     }
 
