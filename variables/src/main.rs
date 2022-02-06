@@ -22,4 +22,6 @@ fn main() {
 
     println!("its {} {} {}",x,y,z);
     println!("{}*{}*{}", tupl.0, tupl.1, tupl.2);
+
+    let arr = [1,2,3,4,5];
 }
